@@ -1,5 +1,6 @@
 {
   "name": "xy113/chinapay",
+  "version": "1.0.0",
   "keywords": [
     "chinapay",
     "银联支付"
@@ -7,6 +8,7 @@
   "description": "银联电子支付扩展包",
   "license": "MIT",
   "type": "library",
+  "homepage": "https://github.com/xy113/chinapay",
   "authors": [
     {
       "name": "xy113",
@@ -14,6 +16,7 @@
     }
   ],
   "require": {
+    "php": ">=7.0",
     "ext-openssl": "*",
     "ext-mbstring": "*",
     "ext-bcmath": "*",
