@@ -1,0 +1,29 @@
+{
+  "name": "xy113/chinapay",
+  "keywords": [
+    "chinapay",
+    "银联支付"
+  ],
+  "description": "银联电子支付扩展包",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "xy113",
+      "email": "songdewei@163.com"
+    }
+  ],
+  "require": {
+    "ext-openssl": "*",
+    "ext-mbstring": "*",
+    "ext-bcmath": "*",
+    "guzzlehttp/guzzle": "^6.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "ChinaPay\\": "src/"
+    },
+    "files": [
+    ]
+  }
+}

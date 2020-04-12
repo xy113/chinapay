@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b5d4b644-5a31-4e97-bb37-206ad227e76d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1aMWI3ytJj8HfslxvQ2xTWXvmuU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b5d4b644-5a31-4e97-bb37-206ad227e76d" name="Default Changelist" comment="" />
+      <created>1586545859389</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586545859389</updated>
+      <workItem from="1586545860629" duration="2044000" />
+      <workItem from="1586627073884" duration="600000" />
+      <workItem from="1586674692447" duration="875000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="467" y="349" key="ComposerInitDialogKey" timestamp="1586547729556">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="467" y="349" key="ComposerInitDialogKey/0.23.1440.813@0.23.1440.813" timestamp="1586547729556" />
+    <state x="509" y="259" key="NewPhpClassDialog" timestamp="1586674772835">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state x="509" y="259" key="NewPhpClassDialog/0.23.1440.812@0.23.1440.812" timestamp="1586674772835" />
+    <state x="509" y="260" key="NewPhpClassDialog/0.23.1440.815@0.23.1440.815" timestamp="1586546209832" />
+    <state x="221" y="67" key="SettingsEditor" timestamp="1586547714232">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="221" y="67" key="SettingsEditor/0.23.1440.813@0.23.1440.813" timestamp="1586547714232" />
+    <state width="451" height="121" key="javadoc.popup.new" timestamp="1586675030727">
+      <screen x="0" y="23" width="1440" height="812" />
+    </state>
+    <state width="451" height="121" key="javadoc.popup.new/0.23.1440.812@0.23.1440.812" timestamp="1586675030727" />
+    <state width="451" height="121" key="javadoc.popup.new/0.23.1440.813@0.23.1440.813" timestamp="1586627559874" />
+    <state width="451" height="121" key="javadoc.popup.new/0.23.1440.815@0.23.1440.815" timestamp="1586547292311" />
+  </component>
+</project>
