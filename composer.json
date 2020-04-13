@@ -1,11 +1,11 @@
 {
   "name": "xy113/chinapay",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "keywords": [
     "chinapay",
     "银联支付"
   ],
-  "description": "银联电子支付扩展包",
+  "description": "chinapay kit",
   "license": "MIT",
   "type": "library",
   "homepage": "https://github.com/xy113/chinapay",
@@ -28,5 +28,11 @@
     },
     "files": [
     ]
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
   }
 }

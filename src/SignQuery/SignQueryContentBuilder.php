@@ -7,42 +7,33 @@
  * @author:     David Song<songdewei@163.com>
  * @version:    v1.0.0
  * ---------------------------------------------
- * Date: 2020/4/12
- * Time: 11:49 下午
+ * Date: 2020/4/13
+ * Time: 6:11 下午
  */
 
-namespace ChinaPay\Query;
+namespace ChinaPay\SignQuery;
 
 
 use ChinaPay\Traits\HasContent;
 
-class QueryContentBuilder
+class SignQueryContentBuilder
 {
     use HasContent;
 
     protected $content = [
-        'Version' => '20140728',
+        'Version' => '20150922',
         'AccessType' => 0,
         'InstuId' => '',
         'AcqCode' => '',
         'MerId' => '',
-        'MerOrderNo' => '',
-        'TranDate' => '',
-        'TranType' => '0502',
         'BusiType' => '0001',
-        'TranReserved' => ''
+        'TranType' => '0504',
+        'OriTranType' => '9904',
+        'CardTranData' => '',
+        'TranReserved' => '',
+        'TimeStamp' => '',
+        'RemoteAddr' => ''
     ];
-
-    /**
-     * 设置商户订单号
-     * @param $value
-     * @return $this
-     */
-    public function setMerOrderNo($value)
-    {
-        $this->content['MerOrderNo'] = $value;
-        return $this;
-    }
 
     /**
      * @param $value
@@ -58,9 +49,19 @@ class QueryContentBuilder
      * @param $value
      * @return $this
      */
-    public function setTranReserved($value)
+    public function setOriTranType($value)
     {
-        $this->content['TranReserved'] = $value;
+        $this->content['OriTranType'] = $value;
+        return $this;
+    }
+
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setCardTranData($value)
+    {
+        $this->content['CardTranData'] = $value;
         return $this;
     }
 }

@@ -7,30 +7,35 @@
  * @author:     David Song<songdewei@163.com>
  * @version:    v1.0.0
  * ---------------------------------------------
- * Date: 2020/4/12
- * Time: 11:49 下午
+ * Date: 2020/4/13
+ * Time: 6:04 下午
  */
 
-namespace ChinaPay\Query;
+namespace ChinaPay\Rescission;
 
 
 use ChinaPay\Traits\HasContent;
 
-class QueryContentBuilder
+class RescissionContentBuilder
 {
     use HasContent;
 
     protected $content = [
-        'Version' => '20140728',
+        'Version' => '20150922',
         'AccessType' => 0,
         'InstuId' => '',
         'AcqCode' => '',
         'MerId' => '',
         'MerOrderNo' => '',
         'TranDate' => '',
-        'TranType' => '0502',
+        'TranTime' => '',
         'BusiType' => '0001',
-        'TranReserved' => ''
+        'TranType' => '9905',
+        'OriTranType' => '9904',
+        'CardTranData' => '',
+        'TranReserved' => '',
+        'TimeStamp' => '',
+        'RemoteAddr' => ''
     ];
 
     /**
@@ -58,9 +63,29 @@ class QueryContentBuilder
      * @param $value
      * @return $this
      */
-    public function setTranReserved($value)
+    public function setTranTime($value)
     {
-        $this->content['TranReserved'] = $value;
+        $this->content['TranTime'] = $value;
+        return $this;
+    }
+
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setOriTranType($value)
+    {
+        $this->content['OriTranType'] = $value;
+        return $this;
+    }
+
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setCardTranData($value)
+    {
+        $this->content['CardTranData'] = $value;
         return $this;
     }
 }

@@ -14,9 +14,13 @@
 namespace ChinaPay\ElementQuery;
 
 
+use ChinaPay\Traits\HasContent;
+
 class ElementQueryContentBuilder
 {
-    private $content = [
+    use HasContent;
+
+    protected $content = [
         'Version' => '20150922',
         'AccessType' => 0,
         'InstuId' => '',
@@ -31,61 +35,6 @@ class ElementQueryContentBuilder
         'TimeStamp' => '',
         'RemoteAddr' => ''
     ];
-
-    /**
-     * QueryContentBuilder constructor.
-     * @param array $content
-     */
-    public function __construct(array $content = [])
-    {
-        foreach ($content as $k => $v) {
-            if (key_exists($k, $this->content)) {
-                if ($v == '' || $v == null) continue;
-                $this->content[$k] = $v;
-            }
-        }
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setAccessType($value)
-    {
-        $this->content['AccessType'] = $value;
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setInstuId($value)
-    {
-        $this->content['InstuId'] = $value;
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setAcqCode($value)
-    {
-        $this->content['AcqCode'] = $value;
-        return $this;
-    }
-
-    /**
-     * 设置商户ID
-     * @param $value
-     * @return $this
-     */
-    public function setMerId($value)
-    {
-        $this->content['MerId'] = $value;
-        return $this;
-    }
 
     /**
      * @param $value
@@ -105,29 +54,5 @@ class ElementQueryContentBuilder
     {
         $this->content['CardTranData'] = $value;
         return $this;
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     * @return $this
-     */
-    public function set($name, $value)
-    {
-        if (key_exists($name, $this->content)) {
-            $this->content[$name] = $value;
-        }
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getBizContent()
-    {
-        foreach ($this->content as $k => $v) {
-            if ($v == '' || $v == null) unset($this->content[$k]);
-        }
-        return $this->content;
     }
 }

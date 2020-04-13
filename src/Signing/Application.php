@@ -7,11 +7,11 @@
  * @author:     David Song<songdewei@163.com>
  * @version:    v1.0.0
  * ---------------------------------------------
- * Date: 2020/4/12
- * Time: 11:54 下午
+ * Date: 2020/4/13
+ * Time: 5:51 下午
  */
 
-namespace ChinaPay\Query;
+namespace ChinaPay\Signing;
 
 
 use ChinaPay\Exception\ChinaPayException;
@@ -21,11 +21,15 @@ class Application
 {
     use HasApi;
 
-    protected $version = '20140728';
-    //生产环境api
-    protected $prodApi = 'https://payment.chinapay.com/CTITS/service/rest/forward/syn/000000000060/0/0/0/0/0';
-    //测试环境api
-    protected $testApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000060/0/0/0/0/0';
+    protected $version = '20150922';
+    //生产环境api 前台
+    protected $prodApi = 'https://payment.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
+    //测试环境api 前台
+    protected $testApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
+    //生产环境api 后台
+    protected $bgApi = 'https://payment.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
+    //测试环境api 后台
+    protected $bgTestApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
 
     /**
      * Application constructor.
@@ -56,11 +60,29 @@ class Application
     }
 
     /**
+     * @return $this
+     */
+    public function bgSigning()
+    {
+        $this->api = $this->bgApi;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function bgTestSigning()
+    {
+        $this->api = $this->bgTestApi;
+        return $this;
+    }
+
+    /**
      * @param array $content
      * @return bool|string
      * @throws ChinaPayException
      */
-    public function requestQuery(array $content)
+    public function requestSign(array $content)
     {
         return $this->sendRequest($content);
     }
@@ -70,7 +92,7 @@ class Application
      */
     protected function validateContent()
     {
-        $builder = new QueryContentBuilder($this->content);
+        $builder = new SignContentBuilder($this->content);
         if (!$builder->get('Version')) {
             $builder->set('Version', $this->version);
         }
@@ -96,7 +118,19 @@ class Application
         }
 
         if (!$builder->get('TranDate')) {
-            throw new ChinaPayException('missing TranDate value', 400);
+            $builder->set('TranDate', date('Ymd'));
+        }
+
+        if (!$builder->get('TranTime')) {
+            $builder->set('TranTime', date('His'));
+        }
+
+        if (!$builder->get('MerBgUrl')) {
+            $builder->set('MerBgUrl', $this->config['mer_bg_url']);
+        }
+
+        if (!$builder->get('CardTranData')) {
+            throw new ChinaPayException('missing CardTranData value', 400);
         }
 
         $this->content = $builder->getBizContent();
