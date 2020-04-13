@@ -1,6 +1,6 @@
 {
   "name": "xy113/chinapay",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "keywords": [
     "chinapay",
     "银联支付"
@@ -28,11 +28,5 @@
     },
     "files": [
     ]
-  },
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://mirrors.aliyun.com/composer/"
-    }
   }
 }

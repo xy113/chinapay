@@ -14,11 +14,10 @@
 namespace ChinaPay\Query;
 
 
-use ChinaPay\Traits\HasContent;
+use ChinaPay\Content\Builder;
 
-class QueryContentBuilder
+class QueryContentBuilder extends Builder
 {
-    use HasContent;
 
     protected $content = [
         'Version' => '20140728',

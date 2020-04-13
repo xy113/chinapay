@@ -11,7 +11,7 @@
  * Time: 6:33 下午
  */
 
-namespace ChinaPay\Traits;
+namespace ChinaPay\Content;
 
 trait HasContent
 {

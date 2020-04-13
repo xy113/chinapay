@@ -14,11 +14,10 @@
 namespace ChinaPay\SignQuery;
 
 
-use ChinaPay\Traits\HasContent;
+use ChinaPay\Content\Builder;
 
-class SignQueryContentBuilder
+class SignQueryContentBuilder extends Builder
 {
-    use HasContent;
 
     protected $content = [
         'Version' => '20150922',

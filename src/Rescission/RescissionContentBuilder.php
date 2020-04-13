@@ -14,11 +14,10 @@
 namespace ChinaPay\Rescission;
 
 
-use ChinaPay\Traits\HasContent;
+use ChinaPay\Content\Builder;
 
-class RescissionContentBuilder
+class RescissionContentBuilder extends Builder
 {
-    use HasContent;
 
     protected $content = [
         'Version' => '20150922',

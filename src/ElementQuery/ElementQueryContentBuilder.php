@@ -14,12 +14,10 @@
 namespace ChinaPay\ElementQuery;
 
 
-use ChinaPay\Traits\HasContent;
+use ChinaPay\Content\Builder;
 
-class ElementQueryContentBuilder
+class ElementQueryContentBuilder extends Builder
 {
-    use HasContent;
-
     protected $content = [
         'Version' => '20150922',
         'AccessType' => 0,
