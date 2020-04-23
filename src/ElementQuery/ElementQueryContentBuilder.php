@@ -14,9 +14,9 @@
 namespace ChinaPay\ElementQuery;
 
 
-use ChinaPay\Content\Builder;
+use ChinaPay\Content\ContentBuilder;
 
-class ElementQueryContentBuilder extends Builder
+class ElementQueryContentBuilder extends ContentBuilder
 {
     protected $content = [
         'Version' => '20150922',

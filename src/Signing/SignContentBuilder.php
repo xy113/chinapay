@@ -14,9 +14,9 @@
 namespace ChinaPay\Signing;
 
 
-use ChinaPay\Content\Builder;
+use ChinaPay\Content\ContentBuilder;
 
-class SignContentBuilder extends Builder
+class SignContentBuilder extends ContentBuilder
 {
 
     protected $content = [
@@ -79,16 +79,6 @@ class SignContentBuilder extends Builder
     public function setMerBgUrl($value)
     {
         $this->content['MerBgUrl'] = $value;
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setCardTranData($value)
-    {
-        $this->content['CardTranData'] = $value;
         return $this;
     }
 }

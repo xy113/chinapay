@@ -14,9 +14,9 @@
 namespace ChinaPay\Payment;
 
 
-use ChinaPay\Content\Builder;
+use ChinaPay\Content\ContentBuilder;
 
-class PayContentBuilder extends Builder
+class PayContentBuilder extends ContentBuilder
 {
 
     protected $content = [

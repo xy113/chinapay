@@ -21,7 +21,6 @@ class Application
 {
     use HasApi;
 
-    protected $version = '20150922';
     //生产环境api
     protected $prodApi = 'https://payment.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
     //测试环境api
@@ -29,12 +28,10 @@ class Application
 
     /**
      * Application constructor.
-     * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct()
     {
         $this->api = $this->prodApi;
-        if ($config) $this->config = $config;
     }
 
     /**
@@ -56,48 +53,16 @@ class Application
     }
 
     /**
-     * @param array $content
-     * @return bool|string
-     * @throws ChinaPayException
-     */
-    public function requestQuery(array $content)
-    {
-        return $this->sendRequest($content);
-    }
-
-    /**
      * @throws ChinaPayException
      */
     protected function validateContent()
     {
-        $builder = new SignQueryContentBuilder($this->content);
-        if (!$builder->get('Version')) {
-            $builder->set('Version', $this->version);
-        }
-
-        if (!$builder->get('MerId')) {
-            if ($this->config['mer_id']) {
-                $builder->set('MerId', $this->config['mer_id']);
-            } else {
-                throw new ChinaPayException('missing MerId value', 400);
-            }
-        }
-
-        if (!$builder->get('BusiType')) {
-            throw new ChinaPayException('missing BusiType value', 400);
-        }
-
-        if (!$builder->get('TranType')) {
-            throw new ChinaPayException('missing TranType value', 400);
-        }
-
-        if (!$builder->get('OriTranType')) {
+        if (!isset($this->content['OriTranType'])) {
             throw new ChinaPayException('missing OriTranType value', 400);
         }
 
-        if (!$builder->get('CardTranData')) {
+        if (!isset($this->content['CardTranData'])) {
             throw new ChinaPayException('missing CardTranData value', 400);
         }
-        $this->content = $builder->getBizContent();
     }
 }

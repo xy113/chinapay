@@ -15,17 +15,11 @@ namespace ChinaPay\Traits;
 
 
 use ChinaPay\Exception\ChinaPayException;
-use ChinaPay\SecssUtil;
 use GuzzleHttp\Client;
 
 trait HasApi
 {
     protected $api;
-    protected $version = '20150922';
-    protected $config = [
-        'mer_id' => '',//商户号
-        'security_ini' => 'path to security.ini'
-    ];
     protected $content = [];
 
     /**
@@ -47,25 +41,41 @@ trait HasApi
     }
 
     /**
-     * @param array $config
-     * @return $this
+     * @return array
      */
-    public function setConfig(array $config)
+    public function getContent(): array
     {
-        $this->config = $config;
-        return $this;
+        return $this->content;
     }
 
     /**
      * @param array $content
+     * @return HasApi
+     */
+    public function setContent(array $content): HasApi
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * 用于后台支付
+     * @param array $content
      * @return string
      * @throws ChinaPayException
      */
-    protected function sendRequest(array $content)
+    public function sendRequest($content=[])
     {
-        $this->content = $content;
+        if (!empty($content)){
+            $this->content = $content;
+        }
+
+        $this->validateCommonFields();
         $this->validateContent();
-        $this->signContent();
+        if (!isset($this->content['Signature'])) {
+            throw new ChinaPayException('missing Signature value', 400);
+        }
+
         $clinet = new Client();
         $res = $clinet->post($this->api, [
             'form_params' => $this->content
@@ -78,27 +88,53 @@ trait HasApi
     }
 
     /**
+     * 用户前台支付
+     * @param array $content
+     * @return string
      * @throws ChinaPayException
      */
-    protected function signContent()
-    {
-        foreach ($this->content as $k => $v) {
-            if ($v == '' || $v == null) unset($this->content[$k]);
+    public function buildRequestForm($content=[]){
+        if (!empty($content)){
+            $this->content = $content;
         }
-        $util = new SecssUtil();
-        $util->init($this->config['security_ini']);
-        if ($util->sign($this->content)) {
-            $this->content['Signature'] = $util->getSign();
-        } else {
-            throw new ChinaPayException($util->getErrMsg(), $util->getErrCode());
+
+        $this->validateCommonFields();;
+        $this->validateContent();
+        if (!isset($this->content['Signature'])) {
+            throw new ChinaPayException('missing Signature value', 400);
         }
+
+        $fields = '';
+        foreach ($this->content as $k=>$v){
+            $fields.= '<input type="hidden" name="'.$k.'" value="'.$v.'">';
+        }
+        return '<html><head><title>ChinaPay Form</title></head><body>'.
+            '<form method="post" id="form" action="'.$this->api.'">'.$fields.'</form>'.
+            '<script>document.getElementById("form").submit();</script></body></html>';
+    }
+
+    protected function validateContent(){
+
     }
 
     /**
      * @throws ChinaPayException
      */
-    protected function validateContent()
-    {
+    protected function validateCommonFields(){
+        if (!isset($this->content['Version'])) {
+            throw new ChinaPayException('missing Version value', 400);
+        }
 
+        if (!isset($this->content['MerId'])) {
+            throw new ChinaPayException('missing MerId value', 400);
+        }
+
+        if (!isset($this->content['BusiType'])) {
+            throw new ChinaPayException('missing BusiType value', 400);
+        }
+
+        if (!isset($this->content['TranType'])) {
+            throw new ChinaPayException('missing TranType value', 400);
+        }
     }
 }

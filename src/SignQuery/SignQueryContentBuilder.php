@@ -14,9 +14,9 @@
 namespace ChinaPay\SignQuery;
 
 
-use ChinaPay\Content\Builder;
+use ChinaPay\Content\ContentBuilder;
 
-class SignQueryContentBuilder extends Builder
+class SignQueryContentBuilder extends ContentBuilder
 {
 
     protected $content = [
@@ -51,16 +51,6 @@ class SignQueryContentBuilder extends Builder
     public function setOriTranType($value)
     {
         $this->content['OriTranType'] = $value;
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setCardTranData($value)
-    {
-        $this->content['CardTranData'] = $value;
         return $this;
     }
 }

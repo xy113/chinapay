@@ -14,9 +14,9 @@
 namespace ChinaPay\Query;
 
 
-use ChinaPay\Content\Builder;
+use ChinaPay\Content\ContentBuilder;
 
-class QueryContentBuilder extends Builder
+class QueryContentBuilder extends ContentBuilder
 {
 
     protected $content = [

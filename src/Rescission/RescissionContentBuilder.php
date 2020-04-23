@@ -14,9 +14,9 @@
 namespace ChinaPay\Rescission;
 
 
-use ChinaPay\Content\Builder;
+use ChinaPay\Content\ContentBuilder;
 
-class RescissionContentBuilder extends Builder
+class RescissionContentBuilder extends ContentBuilder
 {
 
     protected $content = [
@@ -75,16 +75,6 @@ class RescissionContentBuilder extends Builder
     public function setOriTranType($value)
     {
         $this->content['OriTranType'] = $value;
-        return $this;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setCardTranData($value)
-    {
-        $this->content['CardTranData'] = $value;
         return $this;
     }
 }

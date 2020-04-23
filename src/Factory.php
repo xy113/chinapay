@@ -17,12 +17,12 @@ namespace ChinaPay;
  * Class Factory
  * @package ChinaPay
  *
- * @method static \ChinaPay\Payment\Application payment(array $config) 支付
- * @method static \ChinaPay\Query\Application query(array $config) 查询
- * @method static \ChinaPay\ElementQuery\Application elementQuery(array $config) 要素查询
- * @method static \ChinaPay\Signing\Application signing(array $config) 签约
- * @method static \ChinaPay\SignQuery\Application signQuery(array $config) 签约查询
- * @method static \ChinaPay\Rescission\Application rescission(array $config) 解约
+ * @method static \ChinaPay\Payment\Application payment() 支付
+ * @method static \ChinaPay\Query\Application query() 查询
+ * @method static \ChinaPay\ElementQuery\Application elementQuery() 要素查询
+ * @method static \ChinaPay\Signing\Application signing() 签约
+ * @method static \ChinaPay\SignQuery\Application signQuery() 签约查询
+ * @method static \ChinaPay\Rescission\Application rescission() 解约
  */
 class Factory
 {
@@ -30,9 +30,9 @@ class Factory
         'payment' => \ChinaPay\Payment\Application::class,
         'query' => \ChinaPay\Query\Application::class,
         'elementQuery' => \ChinaPay\ElementQuery\Application::class,
-        'signing'=>\ChinaPay\Signing\Application::class,
-        'signQuery'=>\ChinaPay\SignQuery\Application::class,
-        'rescission'=>\ChinaPay\Rescission\Application::class,
+        'signing' => \ChinaPay\Signing\Application::class,
+        'signQuery' => \ChinaPay\SignQuery\Application::class,
+        'rescission' => \ChinaPay\Rescission\Application::class,
     ];
 
     /**
@@ -40,11 +40,11 @@ class Factory
      * @param array $config
      * @return mixed
      */
-    public static function make($name, array $config = [])
+    public static function make($name)
     {
         $application = self::$appMap[$name];
 
-        return new $application($config);
+        return new $application();
     }
 
     /**

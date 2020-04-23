@@ -20,25 +20,21 @@ use ChinaPay\Traits\HasApi;
 class Application
 {
     use HasApi;
-
-    protected $version = '20150922';
     //生产环境api 前台
     protected $prodApi = 'https://payment.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
-    //测试环境api 前台
-    protected $testApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
     //生产环境api 后台
     protected $bgApi = 'https://payment.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
+    //测试环境api 前台
+    protected $testApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
     //测试环境api 后台
     protected $bgTestApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
 
     /**
      * Application constructor.
-     * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct()
     {
         $this->api = $this->prodApi;
-        if ($config) $this->config = $config;
     }
 
     /**
@@ -71,20 +67,10 @@ class Application
     /**
      * @return $this
      */
-    public function bgTestSigning()
+    public function testBgSigning()
     {
         $this->api = $this->bgTestApi;
         return $this;
-    }
-
-    /**
-     * @param array $content
-     * @return bool|string
-     * @throws ChinaPayException
-     */
-    public function requestSign(array $content)
-    {
-        return $this->sendRequest($content);
     }
 
     /**
@@ -92,47 +78,25 @@ class Application
      */
     protected function validateContent()
     {
-        $builder = new SignContentBuilder($this->content);
-        if (!$builder->get('Version')) {
-            $builder->set('Version', $this->version);
+
+        if (!isset($this->content['TranDate'])) {
+            throw new ChinaPayException('missing TranDate value', 400);
         }
 
-        if (!$builder->get('MerId')) {
-            if ($this->config['mer_id']) {
-                $builder->set('MerId', $this->config['mer_id']);
-            } else {
-                throw new ChinaPayException('missing MerId value', 400);
-            }
+        if (!isset($this->content['TranTime'])) {
+            throw new ChinaPayException('missing TranTime value', 400);
         }
 
-        if (!$builder->get('BusiType')) {
-            throw new ChinaPayException('missing BusiType value', 400);
+        if (!isset($this->content['MerBgUrl'])) {
+            throw new ChinaPayException('missing MerBgUrl value', 400);
         }
 
-        if (!$builder->get('TranType')) {
-            throw new ChinaPayException('missing TranType value', 400);
-        }
-
-        if (!$builder->get('MerOrderNo')) {
+        if (!isset($this->content['MerOrderNo'])) {
             throw new ChinaPayException('missing MerOrderNo value', 400);
         }
 
-        if (!$builder->get('TranDate')) {
-            $builder->set('TranDate', date('Ymd'));
-        }
-
-        if (!$builder->get('TranTime')) {
-            $builder->set('TranTime', date('His'));
-        }
-
-        if (!$builder->get('MerBgUrl')) {
-            $builder->set('MerBgUrl', $this->config['mer_bg_url']);
-        }
-
-        if (!$builder->get('CardTranData')) {
+        if (!isset($this->content['CardTranData'])) {
             throw new ChinaPayException('missing CardTranData value', 400);
         }
-
-        $this->content = $builder->getBizContent();
     }
 }

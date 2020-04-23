@@ -20,42 +20,38 @@ use ChinaPay\Traits\HasApi;
 class Application
 {
     use HasApi;
-
-    protected $version = '20150922';
     //前台支付api 生产环境
-    protected $payApi = 'https://payment.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
+    protected $prodApi = 'https://payment.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
     //前台支付api 测试环境
-    protected $testPayApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
+    protected $testApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/page/nref/000000000017/0/0/0/0/0';
     //后台支付api 生产环境
-    protected $bgPayApi = 'https://payment.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
+    protected $bgApi = 'https://payment.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
     //后台支付api 测试环境
-    protected $bgTestPayApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
+    protected $testBgApi = 'https://newpayment-test.chinapay.com/CTITS/service/rest/forward/syn/000000000017/0/0/0/0/0';
 
     /**
      * Application constructor.
-     * @param array $config
      */
-    public function __construct(array $config)
+    public function __construct()
     {
-        $this->api = $this->payApi;
-        if ($config) $this->config = $config;
+        $this->api = $this->prodApi;
     }
 
     /**
      * @return $this
      */
-    public function pay()
+    public function prod()
     {
-        $this->api = $this->payApi;
+        $this->api = $this->prodApi;
         return $this;
     }
 
     /**
      * @return $this
      */
-    public function testPay()
+    public function test()
     {
-        $this->api = $this->testPayApi;
+        $this->api = $this->testApi;
         return $this;
     }
 
@@ -64,27 +60,17 @@ class Application
      */
     public function bgPay()
     {
-        $this->api = $this->bgPayApi;
+        $this->api = $this->bgApi;
         return $this;
     }
 
     /**
      * @return $this
      */
-    public function bgTestPay()
+    public function testBgPay()
     {
-        $this->api = $this->bgTestPayApi;
+        $this->api = $this->testBgApi;
         return $this;
-    }
-
-    /**
-     * @param array $content
-     * @return bool|string
-     * @throws ChinaPayException
-     */
-    public function requestPay(array $content)
-    {
-        return $this->sendRequest($content);
     }
 
     /**
@@ -92,47 +78,28 @@ class Application
      */
     protected function validateContent()
     {
-        $builder = new PayContentBuilder($this->content);
-        if (!$builder->get('Version')) {
-            $builder->set('Version', $this->version);
+        if (!isset($this->content['TranDate'])) {
+            throw new ChinaPayException('missing TranDate value', 400);
         }
 
-        if (!$builder->get('MerId')) {
-            if ($this->config['mer_id']) {
-                $builder->set('MerId', $this->config['mer_id']);
-            } else {
-                throw new ChinaPayException('missing MerId value', 400);
-            }
+        if (!isset($this->content['TranTime'])) {
+            throw new ChinaPayException('missing TranTime value', 400);
         }
 
-        if (!$builder->get('TranDate')) {
-            $builder->set('TranDate', date('Ymd'));
+        if (!isset($this->content['MerPageUrl'])) {
+            throw new ChinaPayException('missing MerPageUrl value', 400);
         }
 
-        if (!$builder->get('TranTime')) {
-            $builder->set('TranTime', date('His'));
+        if (!isset($this->content['MerBgUrl'])) {
+            throw new ChinaPayException('missing MerBgUrl value', 400);
         }
 
-        if (!$builder->get('BusiType')) {
-            $builder->set('TranTime', '0001');
-        }
-
-        if (!$builder->get('MerPageUrl')) {
-            $builder->set('MerPageUrl', $this->config['mer_page_url']);
-        }
-
-        if (!$builder->get('MerBgUrl')) {
-            $builder->set('MerBgUrl', $this->config['mer_bg_url']);
-        }
-
-        if (!$builder->get('OrderAmt')) {
+        if (!isset($this->content['OrderAmt'])) {
             throw new ChinaPayException('missing OrderAmt value', 400);
         }
 
-        if (!$builder->get('RemoteAddr')) {
-            $builder->set('RemoteAddr', $_SERVER['REMOTE_ADDR']);
+        if (!isset($this->content['RemoteAddr'])) {
+            throw new ChinaPayException('missing RemoteAddr value', 400);
         }
-
-        $this->content = $builder->getBizContent();
     }
 }
