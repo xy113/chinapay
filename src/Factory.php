@@ -23,6 +23,7 @@ namespace ChinaPay;
  * @method static \ChinaPay\Signing\Application signing() 签约
  * @method static \ChinaPay\SignQuery\Application signQuery() 签约查询
  * @method static \ChinaPay\Rescission\Application rescission() 解约
+ * @method static \ChinaPay\Sms\Application sms() 签约短信
  */
 class Factory
 {
@@ -33,6 +34,7 @@ class Factory
         'signing' => \ChinaPay\Signing\Application::class,
         'signQuery' => \ChinaPay\SignQuery\Application::class,
         'rescission' => \ChinaPay\Rescission\Application::class,
+        'sms' => \ChinaPay\Sms\Application::class,
     ];
 
     /**
