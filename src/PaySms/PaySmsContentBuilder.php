@@ -8,67 +8,71 @@
  * @version:    v1.0.0
  * ---------------------------------------------
  * Date: 2020/4/24
- * Time: 2:28 下午
+ * Time: 8:56 下午
  */
 
-namespace ChinaPay\Sms;
+namespace ChinaPay\PaySms;
 
 
 use ChinaPay\Content\ContentBuilder;
 
-class SmsContentBuilder extends ContentBuilder
+class PaySmsContentBuilder extends ContentBuilder
 {
+
     protected $content = [
         'Version' => '20150922',
-        'AccessType' => '0',
+        'AccessType' => 0,
         'InstuId' => '',
         'AcqCode' => '',
         'MerId' => '',
-        'MerOrderNo' => '',
-        'TranDate' => '',
-        'TranTime' => '',
-        'OrderAmt' => '',
+        'TranType' => '0606',
         'BusiType' => '0001',
-        'CurryNo' => 'CNY',
-        'TranType' => '0608',
-        'RemoteAddr' => '',
-        'MerResv' => '',
-        'TranReserved' => '',
-        'CardTranData' => '',
-        'TimeStamp' => '',
-        'RiskData' => ''
+        'MerOrderNo'=>'',
+        'TranDate'=>'',
+        'TranTime'=>'',
+        'OrderAmt'=>'',
+        'CardTranData'=>''
     ];
 
     /**
+     * 设置商户订单号
      * @param $value
+     * @return $this
      */
     public function setMerOrderNo($value)
     {
         $this->content['MerOrderNo'] = $value;
+        return $this;
     }
 
     /**
      * @param $value
+     * @return $this
      */
     public function setTranDate($value)
     {
         $this->content['TranDate'] = $value;
-    }
-
-    /***
-     * @param $value
-     */
-    public function setTranTime($value)
-    {
-        $this->content['TranTime'] = $value;
+        return $this;
     }
 
     /**
      * @param $value
-     * @return ContentBuilder|void
+     * @return $this
      */
-    public function setCardTranData($value)
+    public function setTranTime($value)
     {
-        $this->content['CardTranData'] = $value;
+        $this->content['TranTime'] = $value;
+        return $this;
+    }
+
+    /**
+     * 设置订单金额，单位分
+     * @param $value
+     * @return $this
+     */
+    public function setOrderAmt($value)
+    {
+        $this->content['OrderAmt'] = $value;
+        return $this;
     }
 }

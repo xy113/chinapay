@@ -263,8 +263,7 @@ class SecssUtil
             ));
             $tempSignRawData = mb_convert_encoding($signRawData, "UTF-8", $charSet);
             $this->writeLog("in SecssUitl->sign 待签名数据=[" . $tempSignRawData . "]");
-            //echo $tempSignRawData.'<br><br>';
-            //dd($this->MerPrivateKey['cert']);
+            //dd($tempSignRawData);
             $sign_falg = openssl_sign($tempSignRawData, $signature, $this->MerPrivateKey['pkey'], $this->shaMethod);
             if (!$sign_falg) {
                 $this->errCode = CP_SIGN_GOES_WRONG;
@@ -328,6 +327,7 @@ class SecssUtil
             $tempVerifySignData = mb_convert_encoding($verifySignData, "UTF-8", $charSet);
             $this->writeLog("in SecssUitl->verify  待验证签名数据 =[" . $tempVerifySignData . "]");
             //echo $tempVerifySignData.'<br><br>';
+            //dd($tempVerifySignData);
             $result = openssl_verify($tempVerifySignData, base64_decode($orgSignMsg), $this->CPPublicKey, $this->shaMethod);
             if ($result == 1) {
                 $this->errCode = CP_SUCCESS;
