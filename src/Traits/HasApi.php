@@ -158,7 +158,6 @@ trait HasApi
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, $ssl);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $ssl);
         $res = curl_exec($curl);
         curl_close($curl);
         return $res;
